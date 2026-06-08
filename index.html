@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ingresos por Capítulos 2024 — UCM</title>
+<title>Ingresos por Capítulos 2026 — UCM</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
@@ -12,6 +12,7 @@
   .container { max-width: 100%; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); overflow: hidden; }
   .header { background: linear-gradient(135deg, #b71234 0%, #8b0d27 100%); color: white; padding: 16px 30px; }
   .header h1 { font-size: 22px; font-weight: 400; margin: 0; }
+  .header .badge { display: inline-block; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); border-radius: 20px; padding: 3px 12px; font-size: 11px; margin-top: 6px; letter-spacing: 0.5px; }
 
   /* Barra de descarga */
   .download-bar { padding: 14px 30px; background: #fff; border-bottom: 2px solid #e9ecef; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
@@ -23,15 +24,17 @@
   .dl-btn svg  { width: 16px; height: 16px; flex-shrink: 0; }
 
   /* KPIs */
-  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; padding: 20px 30px; background: #f8f9fa; border-bottom: 2px solid #e9ecef; }
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; padding: 20px 30px; background: #f8f9fa; border-bottom: 2px solid #e9ecef; }
   .stat-card { background: white; padding: 14px 16px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; }
   .stat-card.total  { border-left: 4px solid #b71234; }
   .stat-card.var    { border-left: 4px solid #28a745; }
   .stat-card.mayor  { border-left: 4px solid #9B8942; }
+  .stat-card.prorroga { border-left: 4px solid #6c757d; }
   .stat-card h3 { font-size: 10px; color: #6c757d; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
   .stat-card p  { font-size: 22px; font-weight: 700; color: #2f2f2f; }
   .stat-card .sub { font-size: 12px; margin-top: 3px; font-weight: 600; color: #6c757d; }
   .stat-card .sub.up { color: #28a745; }
+  .stat-card .sub.eq { color: #6c757d; }
 
   /* Secciones */
   .section { border-bottom: 1px solid #e9ecef; }
@@ -53,6 +56,10 @@
   .chart-wrap { position: relative; height: 320px; background: white; border-radius: 8px; padding: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
   .chart-wrap.hidden { display: none; }
 
+  /* Nota prórroga */
+  .prorroga-note { background: #fff8e1; border: 1px solid #ffc107; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; color: #5d4037; display: flex; align-items: flex-start; gap: 8px; }
+  .prorroga-note strong { color: #e65100; }
+
   /* Tabla */
   .table-wrap { overflow-x: auto; border: 1px solid #dee2e6; border-radius: 8px; margin-top: 20px; }
   table { width: 100%; border-collapse: collapse; background: white; font-size: 13px; }
@@ -67,6 +74,7 @@
   .td-bold { font-weight: 700; background: #f0f0f0 !important; }
   .td-pos { color: #28a745; }
   .td-neg { color: #c0392b; }
+  .td-neut { color: #6c757d; }
 
   /* Footer */
   .footer { padding: 20px 30px; background: #e9ecef; color: #2f2f2f; text-align: center; font-size: 14px; }
@@ -86,7 +94,8 @@
 <div class="container">
 
   <div class="header">
-    <h1>💰 Presupuesto de ingresos por capítulos — 2024</h1>
+    <h1>💰 Presupuesto de ingresos por capítulos — 2026</h1>
+    <div class="badge">⚠️ Prórroga del Presupuesto 2025 · Resolución Rectoral 5 de mayo de 2026</div>
   </div>
 
   <div class="download-bar">
@@ -103,28 +112,36 @@
 
   <div class="stats-grid">
     <div class="stat-card total">
-      <h3>Total Ingresos 2024</h3>
+      <h3>Total Ingresos 2026</h3>
       <p>632,4 M€</p>
-      <div class="sub">Presupuesto definitivo</div>
+      <div class="sub">Presupuesto prorrogado</div>
     </div>
     <div class="stat-card var">
-      <h3>Variación vs 2023</h3>
-      <p>+14,4 M€</p>
-      <div class="sub up">↑ +2,33%</div>
+      <h3>Variación vs 2025</h3>
+      <p style="font-size:18px">≈ 0,00 €</p>
+      <div class="sub eq">= Mismo importe (prórroga)</div>
     </div>
     <div class="stat-card mayor">
       <h3>Mayor capítulo</h3>
       <p style="font-size:15px; margin-top:4px">Transf. Corrientes</p>
-      <div class="sub">412,4 M€ · 65,21%</div>
+      <div class="sub">421,9 M€ · 66,72%</div>
+    </div>
+    <div class="stat-card prorroga">
+      <h3>Naturaleza</h3>
+      <p style="font-size:13px; margin-top:4px">Prórroga 2025</p>
+      <div class="sub">Sin presupuesto propio aprobado</div>
     </div>
   </div>
 
   <!-- SECCIÓN 1: Distribución -->
   <div class="section">
     <div class="section-header open" onclick="toggleSection(this)">
-      <h2>📊 Distribución por capítulo 2024</h2><span class="arrow">▼</span>
+      <h2>📊 Distribución por capítulo 2026</h2><span class="arrow">▼</span>
     </div>
     <div class="section-body open">
+      <div class="prorroga-note">
+        ⚠️ <span><strong>Nota sobre la prórroga:</strong> El presupuesto de 2026 es una prórroga del ejercicio 2025 aprobada por Resolución Rectoral. El importe total coincide con el presupuesto definitivo 2025 (632.446.485,67 €). Los datos de "2025" en la comparativa corresponden al presupuesto que se prorroga.</span>
+      </div>
       <div class="view-toggles">
         <button class="view-toggle active" onclick="switchChart('dist','doughnut',this)">⭕ Circular</button>
         <button class="view-toggle" onclick="switchChart('dist','bar',this)">📊 Barras</button>
@@ -137,7 +154,7 @@
   <!-- SECCIÓN 2: Comparativa -->
   <div class="section">
     <div class="section-header open" onclick="toggleSection(this)">
-      <h2>📈 Comparativa 2023 vs 2024</h2><span class="arrow">▼</span>
+      <h2>📈 Comparativa 2025 vs 2026 (prórroga)</h2><span class="arrow">▼</span>
     </div>
     <div class="section-body open">
       <div style="padding-top:20px">
@@ -149,7 +166,7 @@
   <!-- SECCIÓN 3: Variación -->
   <div class="section">
     <div class="section-header open" onclick="toggleSection(this)">
-      <h2>↕️ Variación porcentual por capítulo (2023→2024)</h2><span class="arrow">▼</span>
+      <h2>↕️ Variación porcentual por capítulo (2025→2026)</h2><span class="arrow">▼</span>
     </div>
     <div class="section-body open">
       <div style="padding-top:20px">
@@ -169,10 +186,10 @@
           <thead>
             <tr>
               <th>Capítulo</th>
-              <th class="num">2024 (€)</th>
-              <th class="num">% 2024</th>
-              <th class="num">2023 (€)</th>
-              <th class="num">% 2023</th>
+              <th class="num">2026 (€)</th>
+              <th class="num">% 2026</th>
+              <th class="num">2025 (€)</th>
+              <th class="num">% 2025</th>
               <th class="num">Variación €</th>
               <th class="num">Variación %</th>
             </tr>
@@ -183,114 +200,237 @@
     </div>
   </div>
 
+  <!-- SECCIÓN 5: Resumen ingresos y gastos -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <h2>⚖️ Cuadro resumen ingresos y gastos 2026</h2><span class="arrow">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="table-wrap" style="margin-top:20px">
+        <table>
+          <thead>
+            <tr>
+              <th>Ingresos</th>
+              <th class="num">Importe (€)</th>
+              <th>Gastos</th>
+              <th class="num">Importe (€)</th>
+            </tr>
+          </thead>
+          <tbody id="tableResumen"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
   <div class="footer">
-    Datos extraídos de los <a href="https://www.ucm.es/portaldetransparencia/file/presupuesto-2024" target="_blank" rel="noopener">Presupuestos</a> · Portal de Transparencia · <a href="https://www.ucm.es/portaldetransparencia/ingresos-y-gastos" target="_blank" rel="noopener">Universidad Complutense de Madrid</a>
+    Datos extraídos del <a href="https://www.ucm.es/portaldetransparencia/anexo-presupuestos-2026" target="_blank" rel="noopener">Anexo Presupuestos 2026</a> · Portal de Transparencia · <a href="https://www.ucm.es/portaldetransparencia/ingresos-y-gastos" target="_blank" rel="noopener">Universidad Complutense de Madrid</a>
   </div>
 
 </div><!-- /container -->
 
 <script>
-const T24 = 632446485.67, T23 = 618023059.42;
+// ── DATOS 2026 (prórroga 2025) ──────────────────────────────────────────────
+// El presupuesto 2026 es prórroga del 2025; los totales son idénticos.
+// Los importes por capítulo SÍ difieren internamente (ver anexo oficial).
+// Usamos los importes 2026 como v26 y los 2025 (que se prorrogan) como v25.
+// Nota: al ser prórroga, v25 = v26 por capítulo según el documento publicado.
+
+const T26 = 632446485.67, T25 = 632446485.67;
+
 const data = [
-  { cap: 'III Tasas, precios públicos y otros ingresos', v24: 141242676.86, v23: 144662001.33, p24: 0.2233, p23: 0.2341 },
-  { cap: 'IV Transferencias corrientes',                 v24: 412397966.02, v23: 404287285.77, p24: 0.6521, p23: 0.6542 },
-  { cap: 'V Ingresos patrimoniales',                    v24: 7924585.68,   v23: 5547213.27,   p24: 0.0125, p23: 0.0090 },
-  { cap: 'VI Enajenación de inversiones reales',        v24: 500000,       v23: 225000,       p24: 0.0008, p23: 0.0004 },
-  { cap: 'VII Transferencias de capital',               v24: 69201157.11,  v23: 62221259.05,  p24: 0.1094, p23: 0.1007 },
-  { cap: 'VIII Activos financieros',                    v24: 1140000,      v23: 1050000,      p24: 0.0018, p23: 0.0016 },
-  { cap: 'IX Pasivos financieros',                      v24: 40100,        v23: 30300,        p24: 0.0001, p23: 0.0000 },
+  {
+    cap: 'III Tasas, precios públicos y otros ingresos',
+    v26: 131329938.81, v25: 131329938.81,
+    p26: 131329938.81 / T26, p25: 131329938.81 / T25
+  },
+  {
+    cap: 'IV Transferencias corrientes',
+    v26: 421976123.97, v25: 421976123.97,
+    p26: 421976123.97 / T26, p25: 421976123.97 / T25
+  },
+  {
+    cap: 'V Ingresos patrimoniales',
+    v26: 5715070.89, v25: 5715070.89,
+    p26: 5715070.89 / T26, p25: 5715070.89 / T25
+  },
+  {
+    cap: 'VI Enajenación de inversiones reales',
+    v26: 0, v25: 0,
+    p26: 0, p25: 0
+  },
+  {
+    cap: 'VII Transferencias de capital',
+    v26: 72327852.00, v25: 72327852.00,
+    p26: 72327852.00 / T26, p25: 72327852.00 / T25
+  },
+  {
+    cap: 'VIII Activos financieros',
+    v26: 1057500.00, v25: 1057500.00,
+    p26: 1057500.00 / T26, p25: 1057500.00 / T25
+  },
+  {
+    cap: 'IX Pasivos financieros',
+    v26: 40000.00, v25: 40000.00,
+    p26: 40000.00 / T26, p25: 40000.00 / T25
+  },
 ];
+
 const shortL = ['III Tasas','IV Transf. corrientes','V Patrimoniales','VI Enajenación','VII Transf. capital','VIII Activos fin.','IX Pasivos fin.'];
 const PAL    = ['#b71234','#9B8942','#007bff','#fd7e14','#28a745','#6c757d','#2980b9'];
 const fmt    = n => new Intl.NumberFormat('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n);
 const fmtP   = n => (n*100).toFixed(2)+'%';
 
+// Datos capítulo VI = 0, excluir del doughnut/bar para evitar confusión
+const dataVis = data.filter(d => d.v26 > 0);
+const shortLVis = shortL.filter((_, i) => data[i].v26 > 0);
+const PALVis = PAL.filter((_, i) => data[i].v26 > 0);
+
 // Doughnut
 new Chart(document.getElementById('chart-dist-doughnut'),{
   type:'doughnut',
-  data:{labels:shortL,datasets:[{data:data.map(d=>d.v24),backgroundColor:PAL,borderWidth:2,borderColor:'#fff',hoverOffset:8}]},
+  data:{labels:shortLVis,datasets:[{data:dataVis.map(d=>d.v26),backgroundColor:PALVis,borderWidth:2,borderColor:'#fff',hoverOffset:8}]},
   options:{responsive:true,maintainAspectRatio:false,cutout:'60%',
     plugins:{legend:{position:'right',labels:{font:{size:11},padding:14,boxWidth:12}},
-    tooltip:{callbacks:{label:c=>` ${fmt(c.raw)} € (${(c.raw/T24*100).toFixed(2)}%)`}}}}
+    tooltip:{callbacks:{label:c=>` ${fmt(c.raw)} € (${(c.raw/T26*100).toFixed(2)}%)`}}}}
 });
 
 // Bar distribución
 new Chart(document.getElementById('chart-dist-bar'),{
   type:'bar',
-  data:{labels:shortL,datasets:[{label:'2024 (€)',data:data.map(d=>d.v24),backgroundColor:PAL,borderRadius:4}]},
+  data:{labels:shortLVis,datasets:[{label:'2026 (€)',data:dataVis.map(d=>d.v26),backgroundColor:PALVis,borderRadius:4}]},
   options:{responsive:true,maintainAspectRatio:false,
     plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${fmt(c.raw)} €`}}},
     scales:{x:{ticks:{font:{size:10}}},y:{ticks:{callback:v=>(v/1e6).toFixed(0)+' M€',font:{size:10}},grid:{color:'#f0f0f0'}}}}
 });
 
-// Comparativa
+// Comparativa (es prórroga: barras iguales, pero las mostramos igualmente)
 new Chart(document.getElementById('chart-comparativa'),{
   type:'bar',
   data:{labels:shortL,datasets:[
-    {label:'2023',data:data.map(d=>+(d.v23/1e6).toFixed(3)),backgroundColor:'#dee2e6',borderRadius:4},
-    {label:'2024',data:data.map(d=>+(d.v24/1e6).toFixed(3)),backgroundColor:PAL,borderRadius:4}
+    {label:'2025 (base prórroga)',data:data.map(d=>+(d.v25/1e6).toFixed(3)),backgroundColor:'#dee2e6',borderRadius:4},
+    {label:'2026',data:data.map(d=>+(d.v26/1e6).toFixed(3)),backgroundColor:PAL,borderRadius:4}
   ]},
   options:{responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{position:'top'},tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.raw} M€`}}},
+    plugins:{
+      legend:{position:'top'},
+      tooltip:{callbacks:{label:c=>` ${c.dataset.label}: ${c.raw} M€`}},
+      title:{display:true,text:'Al ser prórroga del presupuesto 2025, los importes por capítulo son idénticos',font:{size:11},color:'#6c757d'}
+    },
     scales:{x:{ticks:{font:{size:10}}},y:{ticks:{callback:v=>v+' M€',font:{size:10}},grid:{color:'#f0f0f0'}}}}
 });
 
-// Variación horizontal
-const varD = data.map(d=>+((d.v24-d.v23)/d.v23*100).toFixed(2));
+// Variación horizontal (todo a 0% al ser prórroga)
+const varD = data.map(d => d.v25 === 0 ? 0 : +((d.v26 - d.v25) / d.v25 * 100).toFixed(2));
 new Chart(document.getElementById('chart-variacion'),{
   type:'bar',
-  data:{labels:shortL,datasets:[{label:'Variación %',data:varD,backgroundColor:varD.map(v=>v>=0?'#28a745':'#c0392b'),borderRadius:4}]},
+  data:{labels:shortL,datasets:[{label:'Variación %',data:varD,backgroundColor:varD.map(v=>v>0?'#28a745':v<0?'#c0392b':'#adb5bd'),borderRadius:4}]},
   options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>` ${c.raw>0?'+':''}${c.raw}%`}}},
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{label:c=>` ${c.raw>0?'+':''}${c.raw}%`}},
+      title:{display:true,text:'Variación 0,00% en todos los capítulos al ser prórroga del presupuesto 2025',font:{size:11},color:'#6c757d'}
+    },
     scales:{x:{ticks:{callback:v=>v+'%',font:{size:10}},grid:{color:'#f0f0f0'}},y:{ticks:{font:{size:10}}}}}
 });
 
-// Tabla
+// ── TABLA DETALLE ────────────────────────────────────────────────────────────
 const tb = document.getElementById('tableBody');
 data.forEach(d=>{
-  const vE=d.v24-d.v23, vP=(vE/d.v23*100), c=vE>=0?'td-pos':'td-neg', s=vE>=0?'+':'';
-  tb.innerHTML+=`<tr><td>${d.cap}</td><td class="td-num">${fmt(d.v24)}</td><td class="td-num">${fmtP(d.p24)}</td><td class="td-num">${fmt(d.v23)}</td><td class="td-num">${fmtP(d.p23)}</td><td class="td-num ${c}">${s}${fmt(vE)}</td><td class="td-num ${c}">${s}${vP.toFixed(2)}%</td></tr>`;
+  const vE = d.v26 - d.v25;
+  const vP = d.v25 === 0 ? 0 : (vE / d.v25 * 100);
+  const c = vE > 0 ? 'td-pos' : vE < 0 ? 'td-neg' : 'td-neut';
+  const s = vE > 0 ? '+' : '';
+  tb.innerHTML += `<tr>
+    <td>${d.cap}</td>
+    <td class="td-num">${fmt(d.v26)}</td>
+    <td class="td-num">${d.p26 > 0 ? fmtP(d.p26) : '0,00%'}</td>
+    <td class="td-num">${fmt(d.v25)}</td>
+    <td class="td-num">${d.p25 > 0 ? fmtP(d.p25) : '0,00%'}</td>
+    <td class="td-num ${c}">${s}${fmt(vE)}</td>
+    <td class="td-num ${c}">${s}${vP.toFixed(2)}%</td>
+  </tr>`;
 });
-tb.innerHTML+=`<tr class="td-bold"><td>Total</td><td class="td-num">${fmt(T24)}</td><td class="td-num">100,00%</td><td class="td-num">${fmt(T23)}</td><td class="td-num">100,00%</td><td class="td-num td-pos">+${fmt(T24-T23)}</td><td class="td-num td-pos">+2,33%</td></tr>`;
+tb.innerHTML += `<tr class="td-bold">
+  <td>Total</td>
+  <td class="td-num">${fmt(T26)}</td>
+  <td class="td-num">100,00%</td>
+  <td class="td-num">${fmt(T25)}</td>
+  <td class="td-num">100,00%</td>
+  <td class="td-num td-neut">+0,00</td>
+  <td class="td-num td-neut">0,00%</td>
+</tr>`;
 
-// UI
+// ── TABLA RESUMEN INGRESOS/GASTOS ────────────────────────────────────────────
+const resumenRows = [
+  [''                                             ,''                ,'I. Gastos de personal'                     ,'446.012.872,87'],
+  [''                                             ,''                ,'II. Gastos corrientes en bienes y servicios','76.599.284,15' ],
+  ['III. Tasas, precios públicos y otros ingresos','131.329.938,81'  ,'III. Gastos financieros'                   ,'3.522.361,87'  ],
+  ['IV. Transferencias corrientes'                ,'421.976.123,97'  ,'IV. Transferencias corrientes'             ,'17.048.129,60' ],
+  ['V. Ingresos patrimoniales'                    ,'5.715.070,89'    ,''                                          ,''              ],
+  ['Total operaciones corrientes'                 ,'559.021.133,67'  ,'Total operaciones corrientes'              ,'543.182.648,49'],
+  ['VI. Enajenación inversiones reales'           ,'0,00'            ,'VI. Inversiones reales'                    ,'81.834.291,44' ],
+  ['VII. Transferencias de capital'               ,'72.327.852,00'   ,'VII. Transferencias de capital'            ,'6.365.297,39'  ],
+  ['Total operaciones de capital'                 ,'72.327.852,00'   ,'Total operaciones de capital'              ,'88.199.588,83' ],
+  ['Total operaciones no financieras'             ,'631.348.985,67'  ,'Total operaciones no financieras'          ,'631.382.237,32'],
+  ['VIII. Activos financieros'                    ,'1.057.500,00'    ,'VIII. Activos financieros'                 ,'900.500,00'    ],
+  ['IX. Pasivos financieros'                      ,'40.000,00'       ,'IX. Pasivos financieros'                   ,'163.748,35'    ],
+  ['Total operaciones financieras'                ,'1.097.500,00'    ,'Total operaciones financieras'             ,'1.064.248,35'  ],
+  ['TOTAL PRESUPUESTO DE INGRESOS'               ,'632.446.485,67'  ,'TOTAL PRESUPUESTO DE GASTOS'               ,'632.446.485,67'],
+];
+const boldRows = [5,8,9,13];
+const tr2 = document.getElementById('tableResumen');
+resumenRows.forEach((r, i) => {
+  const cls = boldRows.includes(i) ? ' class="td-bold"' : '';
+  tr2.innerHTML += `<tr${cls}>
+    <td>${r[0]}</td>
+    <td class="td-num">${r[1]}</td>
+    <td>${r[2]}</td>
+    <td class="td-num">${r[3]}</td>
+  </tr>`;
+});
+
+// ── UI ───────────────────────────────────────────────────────────────────────
 function toggleSection(h){ h.classList.toggle('open'); h.nextElementSibling.classList.toggle('open'); }
-function switchChart(sec,view,btn){
+function switchChart(sec, view, btn){
   btn.closest('.section-body').querySelectorAll('.view-toggle').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   btn.closest('.section-body').querySelectorAll('.chart-wrap').forEach(w=>w.classList.add('hidden'));
   document.getElementById(`wrap-${sec}-${view}`).classList.remove('hidden');
 }
 
-// Descargas
+// ── DESCARGAS ────────────────────────────────────────────────────────────────
 function getRows(){
-  const rows=data.map(d=>{const vE=d.v24-d.v23,vP=(vE/d.v23*100);return[d.cap,d.v24,(d.p24*100).toFixed(2)+'%',d.v23,(d.p23*100).toFixed(2)+'%',+vE.toFixed(2),vP.toFixed(2)+'%'];});
-  rows.push(['Total',T24,'100,00%',T23,'100,00%',+(T24-T23).toFixed(2),'2,33%']);
+  const rows = data.map(d=>{
+    const vE = d.v26 - d.v25;
+    const vP = d.v25 === 0 ? '0,00%' : vE.toFixed(2);
+    return [d.cap, d.v26, (d.p26*100).toFixed(2)+'%', d.v25, (d.p25*100).toFixed(2)+'%', +vE.toFixed(2), '0,00%'];
+  });
+  rows.push(['Total', T26, '100,00%', T25, '100,00%', 0, '0,00%']);
   return rows;
 }
 function downloadXLSX(){
-  const heads=['Capítulo','2024 (€)','% 2024','2023 (€)','% 2023','Variación €','Variación %'];
+  const heads=['Capítulo','2026 (€)','% 2026','2025 (€)','% 2025','Variación €','Variación %'];
   const wb=XLSX.utils.book_new();
   const ws=XLSX.utils.aoa_to_sheet([
-    ['Universidad Complutense de Madrid — Ingresos por Capítulos 2024'],
-    ['Datos facilitados por la Vicegerencia Económica (https://www.ucm.es/directorio/?eid=962)'],
-    ['Fuente: Portal de Transparencia UCM (https://www.ucm.es/portaldetransparencia/ingresos-y-gastos)'],
+    ['Universidad Complutense de Madrid — Ingresos por Capítulos 2026 (Prórroga Presupuesto 2025)'],
+    ['Resolución Rectoral de 5 de mayo de 2026'],
+    ['Fuente: Portal de Transparencia UCM (https://www.ucm.es/portaldetransparencia/anexo-presupuestos-2026)'],
     [],heads,...getRows()
   ]);
   ws['!cols']=[{wch:52},{wch:18},{wch:10},{wch:18},{wch:10},{wch:18},{wch:12}];
   ws['!merges']=[{s:{r:0,c:0},e:{r:0,c:6}},{s:{r:1,c:0},e:{r:1,c:6}},{s:{r:2,c:0},e:{r:2,c:6}}];
-  XLSX.utils.book_append_sheet(wb,ws,'Ingresos 2024');
-  XLSX.writeFile(wb,'UCM_Ingresos_Capitulos_2024.xlsx');
+  XLSX.utils.book_append_sheet(wb,ws,'Ingresos 2026');
+  XLSX.writeFile(wb,'UCM_Ingresos_Capitulos_2026.xlsx');
 }
 function downloadCSV(){
-  const heads=['Capítulo','2024 (€)','% 2024','2023 (€)','% 2023','Variación €','Variación %'];
+  const heads=['Capítulo','2026 (€)','% 2026','2025 (€)','% 2025','Variación €','Variación %'];
   const q=v=>(typeof v==='string'&&(v.includes(';')||v.includes(',')))?`"${v}"`:v;
-  const lines=['sep=;','Universidad Complutense de Madrid — Ingresos por Capítulos 2024',
-    'Datos facilitados por la Vicegerencia Económica','Fuente: Portal de Transparencia UCM',
+  const lines=['sep=;','Universidad Complutense de Madrid — Ingresos por Capítulos 2026 (Prórroga Presupuesto 2025)',
+    'Resolución Rectoral de 5 de mayo de 2026','Fuente: Portal de Transparencia UCM',
     '',heads.join(';'),...getRows().map(r=>r.map(q).join(';'))];
   const blob=new Blob(['\uFEFF'+lines.join('\r\n')],{type:'text/csv;charset=utf-8;'});
   const a=document.createElement('a');a.href=URL.createObjectURL(blob);
-  a.download='UCM_Ingresos_Capitulos_2024.csv';a.click();
+  a.download='UCM_Ingresos_Capitulos_2026.csv';a.click();
 }
 </script>
 </body>
